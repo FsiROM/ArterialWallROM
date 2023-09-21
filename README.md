@@ -1,33 +1,14 @@
----
-title: ArterialWallROM
-permalink: tutorials-elastic-tube-1d.html
-keywords: OpenFOAM, python, ROM-FOM
-summary: Applying the ROM-FOM approach on a 1D vessel FSI case. Based on ...
----
-
 ## Setup
 
-We want to simulate the internal flow in a flexible tube as shown in the figure below (image from [1]).
-
-![FSI3 setup](images/tutorials-elastic-tube-1d-setup.png)
-
-The flow is assumed to be incompressible flow and gravity is neglected. Due to the axisymmetry, the flow can be described using a quasi-two-dimensional continuity and momentum equations. The motivation and exact formulation of the equations that we consider can be found in [2].
-
-The following parameters have been chosen:
-
-- Length of the tube: L = 10
-- Inlet velocity: $$ v_{inlet} = 10 + 3 sin (10 \pi t) $$
-- Initial cross sectional area = 1
-- Initial velocity: v = 10
-- Initial pressure: p = 0
-- Fluid density: $$ \rho = 1 $$
-- Young modulus: E = 10000
-
-Additionally the solvers use the parameters `N = 100` (number of cells), `tau = 0.01` (dimensionless timestep size), `kappa = 100` (dimensionless structural stiffness) by default. These values can be modified directly in each solver.
+This is a test case of the ROM-FOM approach [4](more reference coming soon about that) on a preCICE tutorial : [elastic-tube-1d](https://github.com/precice/tutorials/tree/master/elastic-tube-1d)
 
 ## ROM Setup
 
-
+You can choose whether to use the solid ROM or not in `solid/SolidSolver.py`
+```python
+training_final_time = 1.  # Length of time period on which to train the ROM
+rom_use = True
+```
 
 ## Running the Simulation
 
@@ -79,3 +60,6 @@ python3 plot-vtk.py diameter fluid-python/output/out_fluid_
 
 [3] M. Mehl, B. Uekermann, H. Bijl, D. Blom, B. Gatzhammer, and A. van Zuijlen.
 Parallel coupling numerics for partitioned fluid-structure interaction simulations. CAMWA, 2016.  
+
+[4] A. Tiba, T. Dairay, F. Devuyst, I. Mortazavi, J-P. Berro Ramirez.
+Non-intrusive reduced order models for partitioned fluid-structure interactions. arXiv:2306.07570, 2023.
